@@ -13,6 +13,11 @@ my_port = config['Healthy']['port']
 
 
 def check_security_health(packages):
+    """
+    This function checks the security health of the packages
+    :param packages:
+    :return: json with package name and health status
+    """
     results = []
     with ThreadPoolExecutor(max_workers=4) as executor:
         # submit the package checking task to the executor
@@ -43,6 +48,10 @@ def check_security_health(packages):
 
 @app.route("/process", methods=["POST"])
 def process():
+    """
+    This function processes the POST request and returns the result
+    :return: unified json with package name and health status
+    """
     data = request.get_json()
     # process the parameters and check for security health
     packages = data["packages"]

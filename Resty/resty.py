@@ -14,7 +14,10 @@ healthy_host = config["Healthy"]["host"]
 
 @app.route("/packages", methods=["POST"])
 def check_packages():
-    # if request.is_json:
+    """
+    exposes a REST endpoint that accepts a JSON payload with a list of packages
+    :return: dict with the result of the check and status code
+    """
     package = request.get_json()
     # pass the packages to the "Healthy" microservice for processing
     response = requests.post(f"http://{healthy_host}:{healthy_port}/process", json={"packages": package['data']})
